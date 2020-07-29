@@ -11,7 +11,7 @@ const dfy = require("dl-from-yt");
 
 ffmpeg.setFfmpegPath(ffmpegPath);
 
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 80;
 
 const app = express();
 app.use(cors());
