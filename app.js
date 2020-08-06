@@ -1,4 +1,4 @@
-const https = require('https');
+const https = require("https");
 const express = require("express");
 const itags = require("./constants/itags");
 const cors = require("cors");
@@ -7,7 +7,7 @@ const ffmpegPath = require("@ffmpeg-installer/ffmpeg").path;
 const ffmpeg = require("fluent-ffmpeg");
 const playlists = require("yt-playlist-scraper");
 const fs = require("fs");
-const path = require('path');
+const path = require("path");
 // const ytpl = require("ytpl");
 // const dfy = require("dl-from-yt");
 // const readline = require("readline");
@@ -18,14 +18,22 @@ const PORT = process.env.PORT || 80;
 
 const app = express();
 app.use(cors());
-app.use("/.well-known/pki-validation/",express.static(path.join(__dirname,".well-known/pki-validation/")));
+app.use(
+  "/.well-known/pki-validation/",
+  express.static(path.join(__dirname, ".well-known/pki-validation/"))
+);
 
-var key = fs.readFileSync(path.resolve(__dirname,"selfsigned.key"));
-var cert = fs.readFileSync(path.resolve(__dirname,"selfsigned.crt"));
+// var key = fs.readFileSync(path.resolve(__dirname, "selfsigned.key"));
+// var cert = fs.readFileSync(path.resolve(__dirname, "selfsigned.crt"));
 
+// var options = {
+//   key: key,
+//   cert: cert,
+// };
 var options = {
-  key: key,
-  cert: cert,
+  key: fs.readFileSync(path.resolve(__dirname, "ssl/private.key")),
+  cert: fs.readFileSync(path.resolve(__dirname, "ssl/certificate.crt")),
+  ca: fs.readFileSync(path.resolve(__dirname, "ssl/ca_bundle.crt")),
 };
 
 app.get("/", async (req, res) => {
@@ -123,11 +131,9 @@ app.get("/downloadVideo", async (req, res) => {
   }).pipe(res);
 });
 
-
 app.listen(PORT, () => console.log(`server is listening at port ${PORT}`));
 
 var server = https.createServer(options, app);
 server.listen(443, () => {
   console.log("server starting on port : " + 443);
 });
-
