@@ -18,6 +18,7 @@ const PORT = process.env.PORT || 80;
 
 const app = express();
 app.use(cors());
+app.use("/.well-known/pki-validation/",express.static(path.join(__dirname,".well-known/pki-validation/")));
 
 var key = fs.readFileSync(path.resolve(__dirname,"selfsigned.key"));
 var cert = fs.readFileSync(path.resolve(__dirname,"selfsigned.crt"));
