@@ -23,18 +23,18 @@ app.use(
   express.static(path.join(__dirname, ".well-known/pki-validation/"))
 );
 
-// var key = fs.readFileSync(path.resolve(__dirname, "selfsigned.key"));
-// var cert = fs.readFileSync(path.resolve(__dirname, "selfsigned.crt"));
+var key = fs.readFileSync(path.resolve(__dirname, "selfsigned.key"));
+var cert = fs.readFileSync(path.resolve(__dirname, "selfsigned.crt"));
 
-// var options = {
-//   key: key,
-//   cert: cert,
-// };
 var options = {
-  key: fs.readFileSync(path.resolve(__dirname, "ssl/private.key")),
-  cert: fs.readFileSync(path.resolve(__dirname, "ssl/certificate.crt")),
-  ca: fs.readFileSync(path.resolve(__dirname, "ssl/ca_bundle.crt")),
+  key: key,
+  cert: cert,
 };
+// var options = {
+//   key: fs.readFileSync(path.resolve(__dirname, "ssl/private.key")),
+//   cert: fs.readFileSync(path.resolve(__dirname, "ssl/certificate.crt")),
+//   ca: fs.readFileSync(path.resolve(__dirname, "ssl/ca_bundle.crt")),
+// };
 
 app.get("/", async (req, res) => {
   res.send("Youtube downloader api works fluently!!!!");
