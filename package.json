@@ -13,7 +13,7 @@
     "@ffmpeg-installer/ffmpeg": "^1.0.20",
     "cors": "^2.8.5",
     "dl-from-yt": "^1.0.5",
-    "express": "^4.17.1",
+    "express": "^4.17.3",
     "fluent-ffmpeg": "^2.1.2",
     "nodemon": "^2.0.4",
     "yt-playlist-scraper": "^1.0.1",
